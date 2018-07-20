@@ -12,6 +12,23 @@ import './editor.scss';
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
+const imgSrc = (attributes) => {
+
+	let width = attributes.width;
+	let height = attributes.height;
+
+	if (!width) {
+		width = 200;
+	}
+
+	if (!height) {
+		height = 200;
+	}
+
+	return `https://baconmockup.com/${parseInt(width)}/${parseInt(height)}`;
+};
+
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -36,6 +53,19 @@ registerBlockType( 'cgb/block-bacon-mockup-block', {
 		__( 'create-guten-block' ),
 	],
 
+	attributes: {
+		width: {
+			source: 'attribute',
+			attribute: 'value',
+			selector: '.width',
+		},
+		height: {
+			source: 'attribute',
+			attribute: 'value',
+			selector: '.height',
+		},
+	},
+
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
 	 * This represents what the editor will render when the block is used.
@@ -44,22 +74,27 @@ registerBlockType( 'cgb/block-bacon-mockup-block', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	edit: function( props ) {
-		// Creates a <p class='wp-block-cgb-block-bacon-mockup-block'></p>.
+	edit: ( { className, attributes } ) => {
+
+		const changeHandler = (e) => {
+			console.log(e, this.state);
+		};
+
+		let src = imgSrc(attributes);
+
 		return (
-			<div className={ props.className }>
-				<p>— Hello from the backend.</p>
-				<p>
-					CGB BLOCK: <code>bacon-mockup-block</code> is a new Gutenberg block
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+			<div className={ className }>
+
+				<img src={src} alt="Bacon Mockup" />
+
+				<div className="editor">
+					<label>
+						Width: <input type="number" name="width" className="width" value={attributes.width || 200} />
+					</label>
+					<label>
+						Height: <input type="number" name="height" className="height" value={attributes.height || 200} onChange={changeHandler} />
+					</label>
+				</div>
 			</div>
 		);
 	},
@@ -72,22 +107,22 @@ registerBlockType( 'cgb/block-bacon-mockup-block', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	save: function( props ) {
+	save: ( { attributes } ) => {
+		let width = attributes.width;
+		let height = attributes.height;
+
+		if (!width) {
+			width = 300;
+		}
+
+		if (!height) {
+			height = 300;
+		}
+
+		const src = `https://baconmockup.com/${parseInt(width)}/${parseInt(height)}`;
+
 		return (
-			<div>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>bacon-mockup-block</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
-			</div>
+			<img src={src} alt="Bacon Mockup" />
 		);
 	},
 } );
