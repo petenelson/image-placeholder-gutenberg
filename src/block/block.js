@@ -14,16 +14,8 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 
 const imgSrc = (attributes) => {
 
-	let width = attributes.width;
-	let height = attributes.height;
-
-	if (!width) {
-		width = 200;
-	}
-
-	if (!height) {
-		height = 200;
-	}
+	let width = attributes.width || 200;
+	let height = attributes.height || 200;
 
 	return `https://baconmockup.com/${parseInt(width)}/${parseInt(height)}`;
 };
@@ -56,12 +48,12 @@ registerBlockType( 'cgb/block-bacon-mockup-block', {
 	attributes: {
 		width: {
 			source: 'attribute',
-			attribute: 'value',
+			attribute: 'width',
 			selector: '.width',
 		},
 		height: {
 			source: 'attribute',
-			attribute: 'value',
+			attribute: 'height',
 			selector: '.height',
 		},
 	},
@@ -74,25 +66,31 @@ registerBlockType( 'cgb/block-bacon-mockup-block', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	edit: ( { className, attributes } ) => {
+	edit: ( { className, attributes, setAttributes } ) => {
 
 		const changeHandler = (e) => {
-			console.log(e, this.state);
-		};
+			switch (e.target.className) {
+				case 'width':
+					setAttributes({ width: parseInt( e.target.value) });
+					break;
 
-		let src = imgSrc(attributes);
+				case 'height':
+					setAttributes({ height: parseInt( e.target.value) });
+					break;
+			}
+		};
 
 		return (
 			<div className={ className }>
 
-				<img src={src} alt="Bacon Mockup" />
+				<img src={imgSrc(attributes)} alt="Bacon Mockup" />
 
 				<div className="editor">
 					<label>
-						Width: <input type="number" name="width" className="width" value={attributes.width || 200} />
+						Width: <input type="number" name="width" className="width" defaultValue={attributes.width || 200} onChange={changeHandler} />
 					</label>
 					<label>
-						Height: <input type="number" name="height" className="height" value={attributes.height || 200} onChange={changeHandler} />
+						Height: <input type="number" name="height" className="height" defaultValue={attributes.height || 200} onChange={changeHandler} />
 					</label>
 				</div>
 			</div>
@@ -108,21 +106,8 @@ registerBlockType( 'cgb/block-bacon-mockup-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: ( { attributes } ) => {
-		let width = attributes.width;
-		let height = attributes.height;
-
-		if (!width) {
-			width = 300;
-		}
-
-		if (!height) {
-			height = 300;
-		}
-
-		const src = `https://baconmockup.com/${parseInt(width)}/${parseInt(height)}`;
-
 		return (
-			<img src={src} alt="Bacon Mockup" />
+			<img src={imgSrc(attributes)} alt="Bacon Mockup" data-width={attributes.width} data-height={attributes.height} />
 		);
 	},
 } );
