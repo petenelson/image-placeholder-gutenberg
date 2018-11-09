@@ -1,15 +1,14 @@
 <?php
 /**
- * Plugin Name: bacon-mockup-block — CGB Gutenberg Block Plugin
- * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: bacon-mockup-block — is a Gutenberg plugin created via create-guten-block.
- * Author: mrahmadawais, maedahbatool
- * Author URI: https://AhmadAwais.com/
+ * Plugin Name: Image Placeholder Gutenberg Block
+ * Description: A Gutenberg block for adding placeholder images.
+ * Author: Pete Nelson
+ * Author URI: https://petenelson.io
  * Version: 1.0.0
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *
- * @package CGB
+ * @package ImagePlaceholderGutenberg
  */
 
 // Exit if accessed directly.
