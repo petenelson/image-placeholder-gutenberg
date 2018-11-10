@@ -3,11 +3,30 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cgb-scripts start",
-    "build": "cgb-scripts build",
-    "eject": "cgb-scripts eject"
+    "watch": "webpack --progress --colors --watch --mode=development",
+    "dev": "webpack --progress --colors --mode=development",
+    "build": "webpack --progress --colors --mode=production"
   },
+  "devDependencies": {
+    "@babel/core": "7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@wordpress/babel-preset-default": "^3.0.1",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "8.0.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "css-loader": "^1.0.1",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "keywords": [],
   "dependencies": {
-    "cgb-scripts": "1.9.8"
+    "@ava/babel-preset-stage-4": "^1.1.0",
+    "lodash.throttle": "^4.1.1"
   }
 }
