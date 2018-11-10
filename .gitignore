@@ -1,7 +1,7 @@
 node_modules/
 dist
 
-assets/block.css
-assets/block.min.css
+assets/blocks.css
+assets/blocks.min.css
 assets/blocks.js
 assets/blocks.min.js

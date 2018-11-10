@@ -9,8 +9,6 @@ module.exports = (env, options) => {
 
 	const devMode = options.mode !== 'production';
 
-	console.log( devMode );
-
 	return {
 		entry: {
 			'blocks':     './assets/src/blocks.js',
