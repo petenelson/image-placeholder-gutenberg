@@ -1,5 +1,7 @@
 node_modules/
 dist
 
-assets/
-!assets/src/*
+assets/block.css
+assets/block.min.css
+assets/blocks.js
+assets/blocks.min.js
