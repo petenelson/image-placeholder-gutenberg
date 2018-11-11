@@ -1,7 +1,5 @@
 node_modules/
-dist
-
-assets/blocks.css
-assets/blocks.min.css
-assets/blocks.js
-assets/blocks.min.js
+assets/image-placeholder-gutenberg.css
+assets/image-placeholder-gutenberg.min.css
+assets/image-placeholder-gutenberg.js
+assets/image-placeholder-gutenberg.min.js

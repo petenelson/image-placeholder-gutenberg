@@ -11,8 +11,8 @@ module.exports = (env, options) => {
 
 	return {
 		entry: {
-			'blocks':     './assets/src/blocks.js',
-			'blocks.min': './assets/src/blocks.js',
+			'image-placeholder-gutenberg':     './assets/src/blocks.js',
+			'image-placeholder-gutenberg.min': './assets/src/blocks.js',
 		},
 		output: {
 			path: path.resolve( __dirname, 'assets' ),
